@@ -1,0 +1,45 @@
+{
+    "name": "fxhash-starter",
+    "version": "1.0.0",
+    "description": "Full FXHash starter project",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "clean": "rm -rf dist && mkdir dist",
+        "build": "run-s clean build:*",
+        "build:js": "esbuild src/js/main.js --bundle --format=iife --loader:.webp=dataurl --loader:.glsl=base64 --loader:.otf=base64 --define:DEVMODE=false | terser --config-file scripts/terser.config.js -o dist/main.js",
+        "build:html": "html-inline -b dist -i src/index.html -o dist/index.html",
+        "build:zip": "zip -FS -qjX9 dist/piece.zip dist/index.html && advzip -z -4 dist/piece.zip",
+        "start": "npm-run-all -s clean -p dev:*",
+        "dev:js": "esbuild src/js/main.js --bundle --format=iife --loader:.webp=dataurl --loader:.glsl=base64 --loader:.otf=base64 --define:DEVMODE=true --sourcemap --outfile=dist/main.js --watch",
+        "dev:serve_watch_html_js": "browser-sync dist src --watch --host 0.0.0.0 --http",
+        "dev:watch_img": "chokidar src/img -d 0 -c 'npm run dev:js'"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/rjewson/fxhash-starter.git"
+    },
+    "keywords": [
+        "fxhash"
+    ],
+    "author": "rjewson@gmail.com",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/rjewson/fxhash-starter/issues"
+    },
+    "homepage": "https://github.com/rjewson/fxhash-starter#readme",
+    "devDependencies": {
+        "@types/p5": "^1.3.3",
+        "advzip-bin": "^2.0.0",
+        "browser-sync": "^2.27.7",
+        "chokidar-cli": "^3.0.0",
+        "esbuild": "^0.14.11",
+        "html-inline": "^1.2.0",
+        "npm-run-all": "^4.1.5",
+        "p5": "^1.4.0",
+        "terser": "^5.10.0"
+    },
+    "dependencies": {
+        "p5": "^1.4.0"
+    }
+}
