@@ -2,6 +2,8 @@ window.$fxhashFeatures = {};
 import p5 from "p5";
 import { addFeature, FX_Features } from "./utils/features";
 
+
+
 const entry = (p) => {
 
     p.setup = () => {
@@ -25,18 +27,25 @@ const entry = (p) => {
         );
 
         // Write the feature to the console
+        console.info("FXHash features:");
         console.table(window.$fxhashFeatures);
 
         p.createCanvas(1000, 1000);
 
-        console.log(`Pixel density = ${p.pixelDensity()}`);
+        // The variable DEVMODE is set to TRUE when runing in development mode.
+        // When the release build is made, its set to FALSE.
+        // In this example the console.log will not run when deployed to FXHash
+        if (DEVMODE) {
+            console.log(`Pixel density = ${p.pixelDensity()}`);
+        }
     };
 
     p.draw = () => {
-        // Drawing magic here...
-
         // Example of fetching a feature with the key "bgcolour"
         p.background(FX_Features["bgcolour"]);
+
+        // Drawing magic here...
+
     };
 
     p.windowResized = () => {};

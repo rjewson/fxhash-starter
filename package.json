@@ -7,7 +7,7 @@
     "scripts": {
         "clean": "rm -rf dist && mkdir dist",
         "build": "run-s clean build:*",
-        "build:js": "esbuild src/js/main.js --bundle --format=iife --loader:.webp=dataurl --loader:.glsl=base64 --loader:.otf=base64 --define:DEVMODE=false | terser --config-file scripts/terser.config.js -o dist/main.js",
+        "build:js": "esbuild src/js/main.js --bundle --format=iife --loader:.webp=dataurl --loader:.glsl=base64 --loader:.otf=base64 --define:DEVMODE=false | terser --config-file terser.config.js -o dist/main.js",
         "build:html": "html-inline -b dist -i src/index.html -o dist/index.html",
         "build:zip": "zip -FS -qjX9 dist/piece.zip dist/index.html && advzip -z -4 dist/piece.zip",
         "start": "npm-run-all -s clean -p dev:*",
