@@ -2,6 +2,7 @@ export const random = (min = 0, max = 1) => fxrand() * (max - min) + min;
 
 export const randomInt = (min = 0, max = 1) => Math.floor(fxrand() * (max - min + 1)) + min;
 
+// Returns a random entry for the provided array.  All choices are equal probability
 export const randomChoice = (array) => array[Math.floor(random(array.length))];
 
 export const randomChance = (percent) => random() > 1 - percent;

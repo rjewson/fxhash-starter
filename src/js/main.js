@@ -28,12 +28,15 @@ const entry = (p) => {
 
         // Another example.  White has 50% chance, grey has 30% chance and black has the remainder, 20% chance
         // As you can see, you dont need to (and should not) define the probability for the last item
+        // Note: here I pass false as the last parameter - this means it will not be added to the FXHash features
+        // and will not be displayed on the tokens page.
         addFeature(
             "Foreground Colour",
             "fgcolour",
-            ["white","grey","black"],
+            ["White","Grey","Black"],
             [0.5,0.3,0],
-            [p.color(255), p.color(128), p.color(0)]
+            [p.color(255), p.color(128), p.color(0)],
+            false
         )
 
         // Write the feature to the console
@@ -41,12 +44,15 @@ const entry = (p) => {
         console.table(window.$fxhashFeatures);
 
         p.createCanvas(1000, 1000);
+        p.noLoop();
 
         // The variable DEVMODE is set to TRUE when runing in development mode.
         // When the release build is made, its set to FALSE.
         // In this example the console.log will not run when deployed to FXHash
         if (DEVMODE) {
             console.log(`Pixel density = ${p.pixelDensity()}`);
+
+            console.log(`Foregound colour is ${FX_Features["fgcolour"]}`);
         }
 
         const image = new Image();
