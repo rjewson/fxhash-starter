@@ -22,9 +22,19 @@ const entry = (p) => {
             // It best practice to define the percetages of the all the values apart from the last, leave that as 0
             // to cover the remaining range.  Bad ranges will result in exceptions.
             [0, 0, 0],
-            // The aactual value you will get, and use in your code
+            // The actual value you will get, and use in your code
             [p.color("#ff0000"), p.color("#00ff00"), p.color("#0000ff")]
         );
+
+        // Another example.  White has 50% chance, grey has 30% chance and black has the remainder, 20% chance
+        // As you can see, you dont need to (and should not) define the probability for the last item
+        addFeature(
+            "Foreground Colour",
+            "fgcolour",
+            ["white","grey","black"],
+            [0.5,0.3,0],
+            [p.color(255), p.color(128), p.color(0)]
+        )
 
         // Write the feature to the console
         console.info("FXHash features:");
@@ -38,6 +48,9 @@ const entry = (p) => {
         if (DEVMODE) {
             console.log(`Pixel density = ${p.pixelDensity()}`);
         }
+
+        const image = new Image();
+        image.src = "images/fxhash.png";
     };
 
     p.draw = () => {
@@ -46,6 +59,7 @@ const entry = (p) => {
 
         // Drawing magic here...
 
+        
     };
 
     p.windowResized = () => {};
